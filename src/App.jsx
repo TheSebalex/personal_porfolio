@@ -1,4 +1,9 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Layout } from "./Components/Layout";
+import { Home } from "./Components/Routes/Home/Home"
+import { Experience } from "./Components/Routes/Experience/Experience";
+import { Portfolio } from "./Components/Routes/Portfolio/Portfolio";
+import { Contact } from "./Components/Routes/Contact/Contact"
 // ... tus otros imports ...
 
 function App() {
