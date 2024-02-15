@@ -36,13 +36,18 @@ export function ProjectItem({ info }) {
     <>
       <li
         className="w-full border-[1px] border-slate-400 rounded-lg overflow-hidden cursor-pointer"
-        onClick={() => setDeployDetail(!deployDetail)}
-      >
-        <img
-          src={info.imageTitle}
-          loading="lazy"
-          className="object-cover border-b-[1px] border-slate-200 bg-black w-full max-h-72 min-h-36"
-        />
+        onClick={() => setDeployDetail(!deployDetail)}>
+        <div className="relative overflow-clip">
+          <img
+            className="absolute top-0 left-0 right-0 blur brightness-[0.6] bottom-0 w-full h-full object-cover scale-110 object-top"
+            src={info.imageTitle}
+          />
+          <img
+            src={info.imageTitle}
+            loading="lazy"
+            className={`relative object-contain border-b-[1px] bg-transparent z-50 border-slate-200 w-full h-72 min-h-36`}
+          />
+        </div>
         <h3 className="text-lg font-black">{info.title}</h3>
       </li>
       {deployDetail && (
@@ -72,7 +77,7 @@ export function ProjectDetail({ info, close }) {
     }, 150);
   };
 
-  const handleSlide = (dir) => {
+  const handleSlide = dir => {
     if (gallery[current + dir]) {
       setCurrent(current + dir);
     }
@@ -83,20 +88,17 @@ export function ProjectDetail({ info, close }) {
       <div
         className={`${
           visible ? "opacity-100" : "opacity-0"
-        } transition-all p-6 flex flex-col scrollbar overflow-auto items-center fixed top-0 bottom-0 left-0 right-0 bg-black/90`}
-      >
+        } transition-all p-6 flex z-[100] flex-col scrollbar overflow-auto items-center fixed top-0 bottom-0 left-0 right-0 bg-black/90`}>
         <div className="lg:w-[80%] max-w-[1280px] min-h-full lg:min-h-[115%] flex flex-col">
           <div
             className="flex w-full cursor-pointer justify-end"
-            onClick={handleClose}
-          >
+            onClick={handleClose}>
             <box-icon name="x" color="#ffffff" size="md"></box-icon>
           </div>
           <div className="flex max-w-[100%] justify-center py-8">
             <div
               className="flex flex-col justify-center cursor-pointer"
-              onClick={() => handleSlide(-1)}
-            >
+              onClick={() => handleSlide(-1)}>
               <box-icon name="chevron-left" color="#ffffff"></box-icon>
             </div>
             <img
@@ -106,8 +108,7 @@ export function ProjectDetail({ info, close }) {
             />
             <div
               className="flex flex-col justify-center cursor-pointer"
-              onClick={() => handleSlide(1)}
-            >
+              onClick={() => handleSlide(1)}>
               <box-icon name="chevron-right" color="#ffffff"></box-icon>
             </div>
           </div>
@@ -124,8 +125,7 @@ export function ProjectDetail({ info, close }) {
             <a
               href={info.link}
               target="_blank"
-              className="text-white text-lg mx-auto px-2 my-5 bg-blueActive rounded-lg"
-            >
+              className="text-white text-lg mx-auto px-2 my-5 bg-blueActive rounded-lg">
               Visitar!
             </a>
           )}
@@ -148,13 +148,13 @@ export function PhotoViewer({ gallery, close, current }) {
     close();
   };
 
-  const moveScrollStyle = (dir) =>
+  const moveScrollStyle = dir =>
     `absolute ${
       dir > 0 ? "right-2" : "left-2"
     } cursor-pointer bottom-[50%] translate-y-[50%] bg-white flex justify-center items-center border-[1px] n border-slate-300 rounded-full leading-none`;
 
-  const scroll = (dir) => {
-    const options = (dir) => ({
+  const scroll = dir => {
+    const options = dir => ({
       top: 0,
       left: window.innerWidth * dir,
       behavior: "smooth",
@@ -176,24 +176,23 @@ export function PhotoViewer({ gallery, close, current }) {
       <div className="fixed top-0 bottom-0 left-0 right-0 bg-black z-40">
         <div
           className="cursor-pointer flex absolute top-4 right-4 z-50 flex-start p-2 bg-black rounded-full"
-          onClick={handleClose}
-        >
+          onClick={handleClose}>
           <box-icon name="x" color="#ffffff" size="md"></box-icon>
         </div>
         <div
           className={moveScrollStyle(-1)}
           onClick={() => {
             scroll(-1);
-          }}
-        >
+          }}>
           <box-icon name="chevron-left"></box-icon>
         </div>
         <div
           ref={containerRef}
-          className="h-full flex overflow-auto snap-x snap-mandatory scrollbar"
-        >
+          className="h-full flex overflow-auto snap-x snap-mandatory scrollbar">
           {gallery.map((src, index) => (
-            <div key={index} className="snap-center min-w-[100vw] object-contain">
+            <div
+              key={index}
+              className="snap-center min-w-[100vw] object-contain">
               <img
                 key={index}
                 src={src}
@@ -206,8 +205,7 @@ export function PhotoViewer({ gallery, close, current }) {
           className={moveScrollStyle(1)}
           onClick={() => {
             scroll(1);
-          }}
-        >
+          }}>
           <box-icon className="rotate-180" name="chevron-right"></box-icon>
         </div>
       </div>
