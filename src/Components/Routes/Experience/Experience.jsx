@@ -41,7 +41,7 @@ export function Experience() {
   );
 }
 
-export function JobItem({info, key}){
+export function JobItem({info}){
   
   return (<>
     <div className="drop-shadow-md gap-2 flex flex-col bg-gradient-to-tr from-cyan-200/70 to-sky-500/50 p-5 rounded-xl">
