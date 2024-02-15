@@ -9,7 +9,7 @@ import { Contact } from "./Components/Routes/Contact/Contact"
 function App() {
   return (
     <>
-      <Router basename={process.env.NODE_ENV === 'production' ? '/personal_porfolio' : '/'}>
+      <Router basename={process.env.NODE_ENV === 'production' ? '/personal_portfolio' : '/'}>
         <Routes>
             <Route path="/" element={<Layout children={<Home/>}/>}></Route>
             <Route path="/experience" element={<Layout children={<Experience/>}/>}></Route>
